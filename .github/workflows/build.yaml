@@ -10,13 +10,18 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
+
       - name: Set up Rust
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
           override: true
-      - run: cargo build --release
-      - uses: actions/upload-artifact@v3
+
+      - name: Build release
+        run: cargo build --release
+
+      - name: Upload macOS binary
+        uses: actions/upload-artifact@v4
         with:
           name: macos-binary
           path: target/release/harmonograph
